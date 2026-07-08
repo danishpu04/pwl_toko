@@ -32,7 +32,14 @@ if (session()->getFlashData('success')) {
                 <tr>
                     <td><?php echo $item['name'] ?></td>
                     <td><img src="<?php echo base_url() . "img/" . $item['options']['foto'] ?>" width="100px"></td>
-                    <td><?php echo number_to_currency($item['price'], 'IDR') ?></td>
+                    <td>
+                        <?php if (isset($item['options']['harga_asli']) && $item['options']['harga_asli'] > $item['price']): ?>
+                            <del class="text-danger" style="font-size: 0.85em;"><?php echo number_to_currency($item['options']['harga_asli'], 'IDR') ?></del><br>
+                            <span style="color: #012970; font-weight: 600; font-size: 1.1em;"><?php echo number_to_currency($item['price'], 'IDR') ?></span>
+                        <?php else: ?>
+                            <?php echo number_to_currency($item['price'], 'IDR') ?>
+                        <?php endif; ?>
+                    </td>
                     <td><input type="number" min="1" name="qty<?php echo $i++ ?>" class="form-control" value="<?php echo $item['qty'] ?>"></td>
                     <td><?php echo number_to_currency($item['subtotal'], 'IDR') ?></td>
                     <td>

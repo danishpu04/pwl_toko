@@ -16,6 +16,16 @@
       </form>
     </div><!-- End Search Bar -->
 
+    <?php
+      $discountModel = new \App\Models\DiscountModel();
+      $activeDiscount = $discountModel->where('tanggal', date('Y-m-d'))->first();
+      if ($activeDiscount):
+    ?>
+    <div class="d-flex align-items-center ms-3 d-none d-md-block">
+        <span class="badge bg-success px-3 py-2" style="font-size: 14px; border-radius: 6px;">Hari ini ada diskon IDR <?= number_format($activeDiscount['nominal'], 0, ',', '.') ?> per item</span>
+    </div>
+    <?php endif; ?>
+
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 

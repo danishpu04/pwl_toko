@@ -1,0 +1,27 @@
+### GET Discount
+GET http://localhost:8080/api/discount
+Accept: application/json
+
+###
+
+### POST Discount
+POST http://localhost:8080/api/discount
+Content-Type: application/json
+Accept: application/json
+
+{
+    "tanggal": "2026-08-17",
+    "nominal": 170845
+}
+
+###
+
+### POST Discount (test error)
+POST http://localhost:8080/api/discount
+Content-Type: application/json
+Accept: application/json
+
+{
+    "tanggal": "2026-08-17",
+    "nominal": 50000
+}

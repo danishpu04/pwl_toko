@@ -69,7 +69,14 @@
                 ?>
                         <tr>
                             <td><?= $item['name'] ?></td>
-                            <td><?= number_to_currency($item['price'], 'IDR') ?></td>
+                            <td>
+                                <?php if (isset($item['options']['harga_asli']) && $item['options']['harga_asli'] > $item['price']): ?>
+                                    <del class="text-danger" style="font-size: 0.85em;"><?php echo number_to_currency($item['options']['harga_asli'], 'IDR') ?></del><br>
+                                    <span style="color: #012970; font-weight: 600; font-size: 1.1em;"><?php echo number_to_currency($item['price'], 'IDR') ?></span>
+                                <?php else: ?>
+                                    <?= number_to_currency($item['price'], 'IDR') ?>
+                                <?php endif; ?>
+                            </td>
                             <td><?= $item['qty'] ?></td>
                             <td><?= number_to_currency($item['price'] * $item['qty'], 'IDR') ?></td>
                         </tr>

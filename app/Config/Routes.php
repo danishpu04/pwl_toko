@@ -22,6 +22,23 @@ $routes->group('produk', ['filter' => 'auth'], function ($routes) {
     $routes->get('download', 'ProdukController::download');
 });
 
+$routes->group('diskon', ['filter' => 'auth'], function ($routes) {
+    $routes->get('', 'DiscountController::index');
+    $routes->post('', 'DiscountController::create');
+    $routes->post('edit/(:any)', 'DiscountController::edit/$1');
+    $routes->get('delete/(:any)', 'DiscountController::delete/$1');
+});
+
+$routes->group('admin-transaksi', ['filter' => 'auth'], function ($routes) {
+    $routes->get('', 'AdminTransaksiController::index');
+    $routes->post('update-status/(:num)', 'AdminTransaksiController::update_status/$1');
+});
+
+$routes->group('api', function ($routes) {
+    $routes->get('discount', 'Api\DiscountController::index');
+    $routes->post('discount', 'Api\DiscountController::create');
+});
+
 $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->get('', 'TransaksiController::index');
     $routes->post('', 'TransaksiController::cart_add');

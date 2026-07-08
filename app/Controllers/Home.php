@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProductModel;
+use App\Models\DiscountModel;
 
 class Home extends BaseController
 {
@@ -17,7 +18,14 @@ class Home extends BaseController
     public function index()
     {
         $products = $this->productModel->findAll();
-        $data['products'] = $products;
+        
+        $discountModel = new DiscountModel();
+        $activeDiscount = $discountModel->where('tanggal', date('Y-m-d'))->first();
+
+        $data = [
+            'products' => $products,
+            'activeDiscount' => $activeDiscount
+        ];
 
         return view('v_home', $data);
     }
